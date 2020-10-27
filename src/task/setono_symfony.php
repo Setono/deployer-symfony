@@ -21,6 +21,7 @@ set('bin/symfony', function () {
     }
 
     run('wget https://get.symfony.com/cli/installer -O - | bash');
+    run('mv ~/.symfony/bin/symfony /usr/local/bin/symfony');
 
     return locateBinaryPath('symfony');
 });
