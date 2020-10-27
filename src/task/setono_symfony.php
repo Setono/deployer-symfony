@@ -9,13 +9,13 @@ use function Deployer\locateBinaryPath;
 use function Deployer\run;
 use function Deployer\set;
 use function Deployer\task;
+use function Safe\sprintf;
 
 set('bin/symfony', function () {
     if (commandExist('symfony')) {
         $binary = locateBinaryPath('symfony');
 
-        // todo: Outcomment this when this issue is fixed: https://github.com/symfony/cli/issues/352
-        // run(\Safe\sprintf('%s self:update --no-interaction'));
+        run(sprintf('%s self:update --yes -q', $binary));
 
         return $binary;
     }
