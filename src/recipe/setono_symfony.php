@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Setono\Deployer\DotEnv;
+namespace Setono\Deployer\Symfony;
 
 use function Deployer\after;
 use function Deployer\before;
