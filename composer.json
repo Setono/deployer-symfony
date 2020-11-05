@@ -11,8 +11,8 @@
     ],
     "require": {
         "php": "^7.4",
+        "composer/package-versions-deprecated": "^1.11",
         "deployer/deployer": "^6.8",
-        "ocramius/package-versions": "^1.9",
         "thecodingmachine/safe": "^1.2"
     },
     "require-dev": {
