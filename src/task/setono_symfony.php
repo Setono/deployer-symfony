@@ -7,6 +7,7 @@ namespace Setono\Deployer\DotEnv;
 use function Deployer\commandExist;
 use function Deployer\has;
 use function Deployer\locateBinaryPath;
+use function Deployer\parse;
 use function Deployer\run;
 use function Deployer\set;
 use function Deployer\task;
@@ -28,8 +29,8 @@ set('bin/symfony', function () {
 });
 
 task('symfony:binary', static function (): void {
-    run('{{bin/symfony}} help > /dev/null');
-})->desc('This is a just a task you can run to make sure the binary is installed');
+    parse('{{bin/symfony}}');
+})->desc('This task will parse the {{bin/symfony}} parameter which makes sure the Symfony binary is installed');
 
 /**
  * This task relies on the 'previous_release' being set. It should therefore hook into the flow like so:
