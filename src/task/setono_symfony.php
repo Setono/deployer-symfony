@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\Deployer\DotEnv;
 
 use function Deployer\commandExist;
+use function Deployer\has;
 use function Deployer\locateBinaryPath;
 use function Deployer\run;
 use function Deployer\set;
@@ -29,3 +30,15 @@ set('bin/symfony', function () {
 task('symfony:binary', static function (): void {
     run('{{bin/symfony}} help > /dev/null');
 })->desc('This is a just a task you can run to make sure the binary is installed');
+
+/**
+ * This task relies on the 'previous_release' being set. It should therefore hook into the flow like so:
+ * after('deploy:release', 'symfony:messenger:stop');
+ */
+task('symfony:messenger:stop', static function (): void {
+    if (!has('previous_release')) {
+        return;
+    }
+
+    run('{{bin/php}} {{previous_release}}/bin/console messenger:stop-workers');
+})->desc('Stops Messenger workers');
