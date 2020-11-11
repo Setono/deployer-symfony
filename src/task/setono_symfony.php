@@ -17,7 +17,9 @@ set('bin/symfony', function () {
     if (commandExist('symfony')) {
         $binary = locateBinaryPath('symfony');
 
-        run(sprintf('%s self:update --yes -q', $binary));
+        if (test(sprintf('[ -w %s ]', dirname($binary)))) {
+            run(sprintf('%s self:update --yes -q', $binary));
+        }
 
         return $binary;
     }
