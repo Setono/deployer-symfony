@@ -16,7 +16,7 @@ use function Deployer\test;
 use function sprintf;
 
 set('symfony_install_binary', false);
-set('symfony__binary_install_location', '/usr/local/bin');
+set('symfony_binary_install_location', '/usr/local/bin');
 
 set('bin/symfony', function () {
     if (commandExist('symfony')) {
@@ -34,7 +34,7 @@ set('bin/symfony', function () {
     }
 
     run('wget https://get.symfony.com/cli/installer -O - | bash');
-    run('mv ~/.symfony/bin/symfony {{symfony__binary_install_location}}/symfony');
+    run('mv ~/.symfony/bin/symfony {{symfony_binary_install_location}}/symfony');
 
     return locateBinaryPath('symfony');
 });
