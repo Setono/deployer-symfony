@@ -20,6 +20,7 @@ set('symfony_binary_install_location', '/usr/local/bin');
 
 set('bin/symfony', function () {
     if (commandExist('symfony')) {
+        /** @var string $binary */
         $binary = locateBinaryPath('symfony');
 
         if (test(sprintf('[ -w %s ]', dirname($binary)))) {
