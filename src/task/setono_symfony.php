@@ -5,14 +5,18 @@ declare(strict_types=1);
 namespace Setono\Deployer\Symfony;
 
 use function Deployer\commandExist;
+use Deployer\Exception\Exception;
+use function Deployer\get;
 use function Deployer\has;
 use function Deployer\locateBinaryPath;
-use function Deployer\parse;
 use function Deployer\run;
 use function Deployer\set;
 use function Deployer\task;
 use function Deployer\test;
-use function Safe\sprintf;
+use function sprintf;
+
+set('symfony_install_binary', false);
+set('symfony__binary_install_location', '/usr/local/bin');
 
 set('bin/symfony', function () {
     if (commandExist('symfony')) {
@@ -25,15 +29,15 @@ set('bin/symfony', function () {
         return $binary;
     }
 
+    if (get('symfony_install_binary') === false) {
+        throw new Exception('The symfony binary does not exist on your server and the parameter symfony_install_binary equals false which means this Deployer recipe won\'t install it either. Either set symfony_install_binary to true or install it manually on the server.');
+    }
+
     run('wget https://get.symfony.com/cli/installer -O - | bash');
-    run('mv ~/.symfony/bin/symfony /usr/local/bin/symfony');
+    run('mv ~/.symfony/bin/symfony {{symfony__binary_install_location}}/symfony');
 
     return locateBinaryPath('symfony');
 });
-
-task('symfony:binary', static function (): void {
-    parse('{{bin/symfony}}');
-})->desc('This task will parse the {{bin/symfony}} parameter which makes sure the Symfony binary is installed');
 
 /**
  * This task relies on the 'previous_release' being set. It should therefore hook into the flow like so:
