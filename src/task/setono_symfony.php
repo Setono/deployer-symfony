@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Setono\Deployer\Symfony;
 
 use function Deployer\commandExist;
-use Deployer\Exception\Exception;
 use function Deployer\get;
 use function Deployer\has;
-use function Deployer\locateBinaryPath;
 use function Deployer\run;
 use function Deployer\set;
 use function Deployer\task;

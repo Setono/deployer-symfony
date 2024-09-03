@@ -28,8 +28,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Setono\\Deployer\\Symfony\\": "tests/"
-        }
+            "Setono\\Deployer\\Symfony\\": "tests/",
+            "Deployer\\": "vendor/deployer/deployer/src/"
+        },
+        "files": [
+            "vendor/deployer/deployer/src/functions.php"
+        ]
     },
     "config": {
         "allow-plugins": {
