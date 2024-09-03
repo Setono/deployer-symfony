@@ -12,7 +12,7 @@
     "require": {
         "php": ">=7.4",
         "composer-runtime-api": "^2",
-        "deployer/deployer": "^6.8"
+        "deployer/deployer": "^6.8 || ^7.0"
     },
     "require-dev": {
         "setono/code-quality-pack": "^2.1.3"
